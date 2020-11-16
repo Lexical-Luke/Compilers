@@ -1,0 +1,3 @@
+A. One can see that the translation has not used short-circuit Boolean operations as the infix operator, AND, has been used. This type of operator requires both operands to be evaluated instead of only one and then allowing branching (short-circuiting) to take place.
+
+C. If one wanted to achieve short-circuiting a branch to jump could be introduced inbetween the two operands of the AND operation around instruction 29.

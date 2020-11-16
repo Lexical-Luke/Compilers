@@ -1,0 +1,30 @@
+  LL1 warning in Sentence: word is the start & successor of a deletable structure
+  LL1 warning in Sentence: num is the start & successor of a deletable structure
+  LL1 warning in Sentence: punc is the start & successor of a deletable structure
+  LL1 warning in Sentence: word is the start & successor of a deletable structure
+
+   1 COMPILER Index $CN
+   2 /*
+   3    Luke Wilkinson - G16W4712
+   4 */
+   5 
+   6 CHARACTERS
+   7   digit      = "0123456789" .
+   8   char       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" .
+   9   special    = ",-+()" .
+  10 
+  11 TOKENS
+  12   word =  char {char} .
+  13   num =  digit {digit} .
+  14   punc = special {special} .
+  15 
+  16 
+  17 IGNORE CHR(0) .. CHR(31)
+  18 
+  19 PRODUCTIONS
+  20   Index      = { Sentence } EOF .
+  21   Sentence   = word {word} {num} {punc} {word} {num} {punc}.
+  22 END Index. 
+
+0 errors detected
+4 warnings detected

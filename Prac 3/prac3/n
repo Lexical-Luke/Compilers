@@ -1,0 +1,42 @@
+ PC:    0 FP: 5112 SP: 5112 HP:   78 TOS:    0  DSP         3
+ PC:    2 FP: 5112 SP: 5109 HP:   78 TOS:    0  LDA         0
+ PC:    4 FP: 5112 SP: 5108 HP:   78 TOS: 5111  LDC_1 
+ PC:    5 FP: 5112 SP: 5107 HP:   78 TOS:    1  STO   
+ PC:    6 FP: 5112 SP: 5109 HP:   78 TOS:    0  LDA         0
+ PC:    8 FP: 5112 SP: 5108 HP:   78 TOS: 5111  LDV   
+ PC:    9 FP: 5112 SP: 5108 HP:   78 TOS:    1  LDC         5
+ PC:   11 FP: 5112 SP: 5107 HP:   78 TOS:    5  CLE   
+ PC:   12 FP: 5112 SP: 5108 HP:   78 TOS:    1  BZE        78
+ PC:   14 FP: 5112 SP: 5109 HP:   78 TOS:    0  LDA         1
+ PC:   16 FP: 5112 SP: 5108 HP:   78 TOS: 5110  LDC         1
+ PC:   18 FP: 5112 SP: 5107 HP:   78 TOS:    1  STO   
+ PC:   19 FP: 5112 SP: 5109 HP:   78 TOS:    0  LDA         2
+ PC:   21 FP: 5112 SP: 5108 HP:   78 TOS: 5109  LDA         0
+ PC:   23 FP: 5112 SP: 5107 HP:   78 TOS: 5111  LDV   
+ PC:   24 FP: 5112 SP: 5107 HP:   78 TOS:    1  STO   
+ PC:   25 FP: 5112 SP: 5109 HP:   78 TOS:    1  LDA         2
+ PC:   27 FP: 5112 SP: 5108 HP:   78 TOS: 5109  LDV   
+ PC:   28 FP: 5112 SP: 5108 HP:   78 TOS:    1  LDC         0
+ PC:   30 FP: 5112 SP: 5107 HP:   78 TOS:    0  CGT   
+ PC:   31 FP: 5112 SP: 5108 HP:   78 TOS:    1  BZE        55
+ PC:   33 FP: 5112 SP: 5109 HP:   78 TOS:    1  LDA         1
+ PC:   35 FP: 5112 SP: 5108 HP:   78 TOS: 5110  LDA         1
+ PC:   37 FP: 5112 SP: 5107 HP:   78 TOS: 5110  LDV   
+ PC:   38 FP: 5112 SP: 5107 HP:   78 TOS:    1  LDA         2
+ PC:   40 FP: 5112 SP: 5106 HP:   78 TOS: 5109  LDV   
+ PC:   41 FP: 5112 SP: 5106 HP:   78 TOS:    1  MUL   
+ PC:   42 FP: 5112 SP: 5107 HP:   78 TOS:    1  STO   
+ PC:   43 FP: 5112 SP: 5109 HP:   78 TOS:    1  LDA         2
+ PC:   45 FP: 5112 SP: 5108 HP:   78 TOS: 5109  LDA         2
+ PC:   47 FP: 5112 SP: 5107 HP:   78 TOS: 5109  LDV   
+ PC:   48 FP: 5112 SP: 5107 HP:   78 TOS:    1  LDC         1
+ PC:   50 FP: 5112 SP: 5106 HP:   78 TOS:    1  SUB   
+ PC:   51 FP: 5112 SP: 5107 HP:   78 TOS:    0  STO   
+ PC:   52 FP: 5112 SP: 5109 HP:   78 TOS:    0  BRN        26
+ PC:   26 FP: 5112 SP: 5109 HP:   78 TOS:    0  DSP         5
+ PC:   28 FP: 5112 SP: 5104 HP:   78 TOS:    0  LDC         0
+ PC:   30 FP: 5112 SP: 5103 HP:   78 TOS:    0  CGT   
+ PC:   31 FP: 5112 SP: 5104 HP:   78 TOS:    0  BZE        55
+ PC:   55 FP: 5112 SP: 5105 HP:   78 TOS:    0        
+
+Illegal opcode at 55

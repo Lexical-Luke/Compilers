@@ -1,0 +1,44 @@
+
+   1 ASSEM
+   2 BEGIN
+   3         DSP    3       ; n is v0, f is v1, i is v2
+   4         LDC    1
+   5         STL    n       ; n = 1;
+   6 WHILE1: LDL    n
+   7         LDC    20      ; // max = 20, constant
+   8         CLE            ; while (n <= max) {
+   9         BZE    EXIT
+  10         LDC    1
+  11         STL    f       ;   f = 1;
+  12         LDL    n
+  13         STL    i       ;   i = n;
+  14 WHILE2: LDL    i
+  15         LDC    0
+  16         CGT            ;   while (i > 0) {
+  17         BZE    EXIT2
+  18         LDL    f
+  19         LDL    i
+  20         MUL
+  21         STL    f       ;     f = f * i;
+  22         LDL    i
+  23         LDC    1
+  24         SUB
+  25         STL    i       ;     i = i = 1;
+  26         BR    WHILE2  ;   }
+****         ^ "end" expected
+  27 EXIT2:  LDL    O
+  28         PRNI           ;   write(n);
+  29         PRNS   "! = "  ;   write("! = ");
+  30         LDL    f
+  31         PRNI           ;   write(f);
+  32         PRNS   "\n"    ;   write("\n") (or use PRNL)
+  33         LDL    n
+  34         LDC    1
+  35         ADD
+  36         STL    n       ;   n = n + 1;
+  37         BRN    WHILE1  ; }
+  38 EXIT1:  HALT
+  39 EXIT3:
+  40 END.
+
+1 errors detected

@@ -1,0 +1,44 @@
+ASSEM
+BEGIN
+  {    0 } DSP      3
+  {    2 } LDA_0   
+  {    3 } LDC_1   
+  {    4 } STO     
+  {    5 } LDL_0   
+  {    6 } LDC      5
+  {    8 } CLE     
+  {    9 } BZE      49
+  {   11 } LDC_1   
+  {   12 } STL_1   
+  {   13 } LDA      2
+  {   15 } LDL_0   
+  {   16 } STO     
+  {   17 } LDL     
+  {   18 } LDC_0   
+  {   19 } CGT     
+  {   20 } BZE      34
+  {   22 } LDA_1   
+  {   23 } LDL_1   
+  {   24 } LDL     
+  {   25 } MUL     
+  {   26 } STO     
+  {   27 } LDA_2   
+  {   28 } LDL     
+  {   29 } LDC_1   
+  {   30 } SUB     
+  {   31 } STO     
+  {   32 } BRN      17
+  {   34 } LDL_0   
+  {   35 } PRNI    
+  {   36 } PRNS     "! = "
+  {   38 } LDL     
+  {   39 } PRNI    
+  {   40 } PRNS     "\n"
+  {   42 } LDA_0   
+  {   43 } LDL_0   
+  {   44 } LDC_1   
+  {   45 } ADD     
+  {   46 } STO     
+  {   47 } BRN      6
+  {   49 } HALT    
+END.

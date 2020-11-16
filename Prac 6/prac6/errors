@@ -1,0 +1,9 @@
+Microsoft (R) Visual C# Compiler version 4.8.4084.0
+for C# 5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+This compiler is provided as part of the Microsoft (R) .NET Framework, but only supports language versions up to C# 5, which is no longer the latest version. For compilers that support newer versions of the C# programming language, see http://go.microsoft.com/fwlink/?LinkID=533240
+
+assem\PVM.cs(220,16): warning CS0168: The variable 'sos' is declared but never used
+assem\PVM.cs(494,17): warning CS0168: The variable 'n' is declared but never used
+assem\PVM.cs(129,19): warning CS0414: The field 'Assem.PVM.padding' is assigned but its value is never used

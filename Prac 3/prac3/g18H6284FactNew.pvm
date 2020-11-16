@@ -1,0 +1,39 @@
+   0   DSP      3       ; n is v0, f is v1, i is v2
+   2   LDC_1
+   3   STL_0               ; n = 1;
+   4   LDL_0
+   5   LDC      5      ; // max = 5, constant
+   7   CLE               ; while (n <= max) {
+   8   BZE      52
+  10   LDC_1
+  11   STL_1               ;   f = 1;
+  12   LDA      2
+  14   LDL_0
+  15   STO               ;   i = n;
+  16   LDL        2
+  18   LDC_0
+  19   CGT               ;   while (i > 0) {
+  20   BZE      38
+  22   LDA_1
+  23   LDL_1
+  24   LDL         2
+  27   MUL
+  28   STO                ;     f = f * i;
+  29   LDA      2
+  31   LDL         2
+  33   LDC_1
+  34   SUB
+  35   STO               ;     i = i - 1;
+  36   BRN      16      ;   }
+  38   LDL_0
+  39   PRNI              ;   write(n);
+  40   PRNS     "! = "  ;   write("! = ");
+  42   LDL_1
+  43   PRNI              ;   write(f);
+  44   PRNS     "\n"    ;   write("\n") (or use PRNL)
+  46   LDL_0
+  47   LDC_1
+  48   ADD
+  49   STL_0               ;   n = n + 1;
+  50   BRN      4       ; }
+  52   HALT

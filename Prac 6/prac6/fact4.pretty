@@ -1,0 +1,14 @@
+Labels:
+
+while1  (defined)  -6 35
+exit1  (defined)  9 -36
+while2  (defined)  -14 26
+exit2  (defined)  17 -27
+exit3  (defined)  -37
+
+
+Variables:
+
+arg  - offset  0 5 6 12 33
+nFact  - offset  1 11 18 21 30
+i  - offset  2 13 14 19 22 25

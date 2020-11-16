@@ -1,0 +1,18 @@
+ASSEM
+BEGIN
+  {    0 } NUL     
+  {    1 } NUL     
+  {    2 } NUL     
+  {    3 } NUL     
+  {    4 } NUL     
+  {    5 } NUL     
+  {    6 } NUL     
+  {    7 } NUL     
+  {    8 } NUL     
+  {    9 } NUL     
+  {   10 } NUL     
+  {   11 } NUL     
+  {   12 } NUL     
+  {   13 } NUL     
+  {   14 } NUL     
+END.

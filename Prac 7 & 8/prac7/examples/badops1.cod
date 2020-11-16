@@ -1,0 +1,42 @@
+ASSEM
+BEGIN
+  {    0 } FHDR    
+  {    1 } CALL     4
+  {    3 } HALT    
+  {    4 } DSP      1
+  {    6 } LDA      4
+  {    8 } LDV     
+  {    9 } LDC      0
+  {   11 } CGT     
+  {   12 } BZE      16
+  {   14 } PRNS     "positive"
+  {   16 } LDA      4
+  {   18 } LDV     
+  {   19 } LDC      4
+  {   21 } LDC      6
+  {   23 } ADD     
+  {   24 } CNE     
+  {   25 } BZE      32
+  {   27 } LDA      0
+  {   29 } STO     
+  {   30 } BRN      16
+  {   32 } PRNS     "loopVar is "
+  {   34 } LDA      4
+  {   36 } LDV     
+  {   37 } PRNI    
+  {   38 } LDA      4
+  {   40 } LDV     
+  {   41 } LDC      3
+  {   43 } REM     
+  {   44 } LDC      0
+  {   46 } CEQ     
+  {   47 } BZE      51
+  {   49 } PRNS     "loopVar is a multiple of 3"
+  {   51 } LDA      4
+  {   53 } LDA      4
+  {   55 } LDV     
+  {   56 } LDC      1
+  {   58 } ADD     
+  {   59 } STO     
+  {   60 } RETV    
+END.

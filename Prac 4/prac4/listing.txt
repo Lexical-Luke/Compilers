@@ -1,0 +1,9 @@
+
+   1   void Main () {
+   2   // (not supposed to do anything useful!)
+   3     int i, _just_kidding;
+****            ^ identifier expected
+   4     bool too______good_______toBeTrue__;
+   5   } // Main
+
+1 errors detected

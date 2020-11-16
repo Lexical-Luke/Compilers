@@ -1,0 +1,52 @@
+                    ; Print a table of factorial numbers 1! ... 20! 
+                    ; Luke Wilkinson: G16W4712
+0   DSP     3       ; n is variable 0, f is variable 1, i is variable 2
+2   LDA     0            
+4   LDC     1        
+6   STO             
+8   LDA     0
+10  LDV
+12  LDC     20         
+14  CLE             ; REPEAT condition (n <= limit) ; limit = 20
+16  BZE     106     ; exit FIRST WHILE loop to instruction 106 if condition fails
+18  LDA     1
+20  LDC     1
+22  STO
+24  LDA     2       ; i
+26  LDV
+28  LDXA               
+30  LDA      0      ; n
+32  LDV
+34  STO             ; i = n
+36  LDA     2
+38  LDV
+40  LDC     0         
+42  CGT             ; REPEAT condition (i > 0) 
+44  BZE     78      ; exit FIRST WHILE loop to instruction 78 if condition fails
+46  LDA      1
+48  LDA      1
+50  LDV
+60  LDA      2
+62  MUL
+64  STO             ; f = f * i
+66  LDA      2
+68  LDA      2
+70  LDV
+72  LDC      1
+74  SUB
+76  STO             ; i-- || i = i - 1
+78  LDA 0           
+80  LDV
+82  PRNI            ; write(n)
+84  PRNS    "! = "  ; write("! = ")
+86  LDA     1               
+88  LDV
+90  PRNI            ; write(f)
+92  PRNS    "\n"    ; write("\n") || PRNL
+94  LDA      0
+96  LDA      0
+98  LDV
+100  LDC      1
+102  ADD
+104  STO            ; n++ || n = n + 1
+106  HALT

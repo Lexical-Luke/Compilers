@@ -1,0 +1,17 @@
+ASSEM
+BEGIN
+  {    0 } FHDR    
+  {    1 } CALL     4
+  {    3 } HALT    
+  {    4 } DSP      0
+  {    6 } LDC      1
+  {    8 } BZE      22
+  {   10 } LDC      1
+  {   12 } PRNI    
+  {   13 } BRN      22
+  {   15 } LDC      2
+  {   17 } PRNI    
+  {   18 } BRN      22
+  {   20 } BRN      6
+  {   22 } RETV    
+END.

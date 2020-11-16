@@ -1,0 +1,67 @@
+using Library;
+
+COMPILER Calc  $CN
+/* Simple four function calculator with 26 memory cells
+   P.D. Terry, Rhodes University, 2015 
+   
+   Luke Wilkinson: G16W4712
+   */
+
+  static double[] mem = new double[26];
+  static bool[] isAssigned = new bool[26];
+
+CHARACTERS
+  digit      = "0123456789" .
+  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" .
+
+TOKENS
+  Number     = digit { digit } [ "." { digit } ] .
+  Variable   = letter .
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Calc                                     (. int index = 0; double value = 0.0;
+                                              for (int i = 0; i < 26; i++) {
+                                               mem[i] = 0.0;
+                                               isAssigned[i] = false; } .)
+  = { Variable                             (. index = token.val[0] - 'A'; .)
+        "=" Expression<out value>  ";"     (. mem[index] = value; 
+                                                  isAssigned[index] = true; .)
+      | "print" Expression<out value> SYNC ";" (. IO.WriteLine(value); .)
+    } EOF .
+
+  Expression<out double expVal>      (. double expVal1 = 0.0; .)
+  = Term<out expVal>
+    {   "+" Term<out expVal1>        (. expVal += expVal1; .)
+      | "-" Term<out expVal1>        (. expVal -= expVal1; .)
+    } .
+
+  Term<out double termVal>           (. double termVal1 = 0.0; .)
+  = Factor<out  termVal>
+    {   "*" Factor<out termVal1>     (. termVal *= termVal1; .)
+      | "/" Factor<out termVal1>     (. if(termVal == 0){
+                                          SemError("Can't divide by zero");
+                                        }
+                                        else{
+                                          termVal /= termVal1; 
+                                        } .)
+    } .
+
+  Factor<out double factVal>         (. factVal = 0.0; double factVal0 = 0.0; double factVal1 = 0.0; .)
+  =   Number                         (. try {
+                                          factVal = Convert.ToDouble(token.val);
+                                        } catch (Exception) {
+                                          factVal = 0; SemError("number out of range");
+                                        } .)
+    | Variable                       (. int index = token.val[0] - 'A';
+                                        if(isAssigned[index]) factVal = mem[index]; 
+                                        else SemError(token.val[0] + " is not defined"); .)
+    | "(" Expression<out factVal> ")"
+    | "max(" Expression<out factVal0> "," Expression<out factVal1> ")" (. if (factVal0 > factVal1) factVal0 = factVal1;
+                                                                          else factVal0 = factVal1; .)
+                                     
+                                        
+    .
+
+END Calc.

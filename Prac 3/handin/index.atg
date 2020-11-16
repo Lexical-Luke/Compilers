@@ -1,0 +1,22 @@
+COMPILER Index $CN
+/*
+   Luke Wilkinson - G16W4712
+*/
+
+CHARACTERS
+  digit      = "0123456789" .
+  char       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" .
+  special    = ",-+()" .
+
+TOKENS
+  word =  char {char} .
+  num =  digit {digit} .
+  punc = special {special} .
+
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Index      = { Sentence } EOF .
+  Sentence   = word {word} {num} {punc} {word} {num} {punc}.
+END Index. 

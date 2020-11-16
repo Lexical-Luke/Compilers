@@ -1,0 +1,28 @@
+COMPILER Calc  $CN
+/* Simple four function calculator
+   P.D. Terry, Rhodes University, 2017 
+   Luke Wilkinson - G16W4712
+*/
+
+CHARACTERS
+  digit      = "0123456789" .
+  hexdigit   = digit + "ABCDEF" .
+  Unary = "+-" .
+
+TOKENS
+  decNumber  = [Unary] digit { digit } ["."] { digit } .
+  hexNumber  = [Unary] "$"  hexdigit { hexdigit } .
+
+
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Calc       = { Expression "=" } EOF .
+  Expression = Term { "+" Term  |  "-" Term } .
+  Term       = Factor { "*" Factor |  "/" Factor |  "^" Factor} .
+  Factor     = decNumber 
+              | hexNumber 
+              | "(" Expression ")"
+              | "sqrt" ["("] Expression [")"] .
+END Calc. 

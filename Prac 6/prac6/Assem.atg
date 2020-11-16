@@ -1,0 +1,134 @@
+using Library;
+
+COMPILER Assem $NC
+/* Simple assembler for the PVM - C# version
+   P.D. Terry, Rhodes University, 2015 
+   
+   Luke Wilkinson: G16W4712
+   */
+
+  const bool known = true;
+
+  public static OutFile pretty;
+
+
+IGNORECASE
+
+CHARACTERS
+  lf         = CHR(10) .
+  control    = CHR(0) .. CHR(31) .
+  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" .
+  digit      = "0123456789" .
+  stringCh   = ANY - '"' - control .
+  printable  = CHR(0) .. CHR(255) - lf .
+
+TOKENS
+  identifier = letter { letter | digit } .
+  number     = [ '+' | '-' ] digit { digit } .
+  label      = letter { letter | digit } ":" .
+  stringLit  = '"' { stringCh } '"' .
+  Comment    = ";" { printable } . 
+  EOL 		 = lf .
+
+COMMENTS FROM "{" TO "}"
+COMMENTS FROM ";" TO lf
+
+IGNORE CHR(9) .. CHR(13)
+
+
+PRODUCTIONS
+  Assem = 
+		  "ASSEM"	              
+		  "BEGIN"         
+		  [Comment EOL]        
+      { Statement }
+      "END" "." 
+      [Comment]       (. LabelTable.CheckLabels(); 
+									       LabelTable.ListReferences(pretty);
+								         VarTable.ListReferences(pretty); 
+                         pretty.Close(); .)
+    .
+
+  Statement
+  = OneWord | TwoWord | WriteString | Label | Branch .
+
+  OneWord
+  = (   "ADD"  | "AND"  | "ANEW" | "CEQ"  | "CGE"  | "CGT"  | "CLE"  | "CLT"
+      | "CNE"  | "DIV"  | "HALT" | "INPB" | "INPI" | "LDV"  | "LDXA" | "MUL"
+      | "NEG"  | "NOP"  | "NOT"  | "OR"   | "PRNB" | "PRNI" | "PRNL" | "REM"
+      | "STO"  | "SUB"  | "LDA_0"| "LDA_1"| "LDC_0"| "LDC_1"| "INC"  | "DEC" )  (. CodeGen.OneWord(token.val); .)
+  .
+
+  TwoWord                                        (. int value; .)
+  = ( "DSP" | "LDC" | "LDA" | "LDL" | "STL" )    (. string mnemonic = token.val; .)
+    (Number<out value>                           (. CodeGen.TwoWord(mnemonic, value); .)
+    | Variable<out value>                        (. CodeGen.TwoWord(mnemonic,value); .)
+	)
+  .
+
+  Number<out int value>
+  = number                       (. try {
+                                      value = Convert.ToInt32(token.val);
+                                    } catch (Exception) {
+                                      value = 0; 
+                                      SemError("number too large");
+                                    } .)
+  .
+
+Variable<out int value>
+  = identifier 				(. try{
+                          string ident_name = token.val;
+                          int lineNumber = token.line;
+                          value = VarTable.FindOffset(ident_name, lineNumber);
+                         } catch (Exception){
+                          value = 0;
+                          SemError("invalid identifier");
+                         }
+							        .)
+  .
+
+  WriteString                    (. string str; .)
+  = "PRNS" StringConst<out str>  (. CodeGen.WriteString(str); .)
+  .
+
+  StringConst<out string str>
+  = stringLit                    (. str = token.val.Substring(1, token.val.Length - 2); .)
+  .
+
+  Label
+  = label                        (. string name = token.val.Substring(0, token.val.Length - 1).ToLower();
+                                    int lineNumber = -token.line;
+                                    LabelEntry entry = LabelTable.Find(name);
+                                    if (entry == null)
+                                      LabelTable.Insert(new LabelEntry(name, new Label(known),lineNumber));
+                                    else if (entry.label.IsDefined())
+                                      SemError("redefined label");
+                                    else {
+                                      entry.label.Here(); 
+                                      entry.AddReference(lineNumber);
+                                    }.)
+  .
+
+  Branch                         (. int target;
+                                    string name;
+                                    Label lab; .)
+  = ( "BRN" | "BZE" )            (. string mnemonic = token.val; .)
+    (   Number<out target>       (. CodeGen.TwoWord(mnemonic, target); .)
+      | Ident<out name>          (. LabelEntry entry = LabelTable.Find(name);
+                                    if (entry == null) {
+                                      lab = new Label(!known);
+                                      int lineNumber = token.line;
+                                      LabelTable.Insert(new LabelEntry(name, lab, lineNumber));
+                                    }
+                                    else {
+                                      lab = entry.label;
+                                      entry.AddReference(token.line);
+                                    }
+                                    CodeGen.Branch(mnemonic, lab); .)
+    ) .
+
+  Ident<out string name>
+  = identifier                   (. name = token.val.ToLower(); .)
+  .
+
+END Assem.

@@ -1,0 +1,55 @@
+                    ; Print a table of factorial numbers 1! ... 20! 
+                    ; Liam Head: G18H6284
+0   DSP     3       ; n is  0, f is  1, i is  2
+2   LDA     0            
+4   LDC     1        
+6   STO             ; n:= 1
+7   LDA     0		
+9	LDV
+10  LDC     20         
+12  CLE             ; REPEAT condition (n <= limit) ; limit = 20
+13  BZE     82     	; exit FIRST WHILE loop to instruction 82 if condition fails
+15  LDA     1		
+17  LDC     1
+19  STO				; f:= 1
+20  LDA     2       
+22  LDA     0      	
+24  LDV
+25  STO             ; i:= n
+26  LDA     2
+28  LDV
+29  LDC     0         
+31  CGT             ; REPEAT condition (i > 0) 
+32  BZE     57      ; exit second while loop to instruction 78 if condition fails
+34  LDA     1
+36  LDA     1
+38  LDV
+39  LDA     2
+41	LDV
+42  MUL
+43  STO             ; f:= f * i
+44 	LDA     2
+46  LDA     2
+48  LDV
+49  LDC     1
+51  SUB
+52  STO             ; i:= i - 1
+53	LDC 	0
+55	BZE 	26		; End Inner while
+57  LDA 	0           
+59  LDV
+60  PRNI            ; write(n)
+61  PRNS    "! = "  ; write("! = ")
+63  LDA     1               
+65  LDV
+66  PRNI            ; write(f)
+67  PRNS    "\n"    ; write("\n") || PRNL
+69  LDA     0
+71  LDA     0
+73  LDV
+74  LDC     1
+76  ADD
+77  STO            	; n:= n + 1
+78	LDC 	0
+80	BZE 	7		; end Outer while
+82  HALT
